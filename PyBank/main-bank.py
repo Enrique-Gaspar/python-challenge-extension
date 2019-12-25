@@ -61,7 +61,15 @@ with open(budget_file, newline="") as budget_csv:
     
 #     # The greatest increase in profits (dates and amount) over the entire period
 #     #greatest_inc = 
-#     # The greatest decrease in losses (date and amount) over the entire period
+        
+        #greatest_to_print = [XXX for XXX in p_l if XXX == {greatest_inc}]
+        #print(greatest_to_print)
+    
+        # The greatest decrease in losses (date and amount) over the entire period
+        #greatest_dec = 
+        
+        #greatest_dec_to_print = [XXX for XXX in p_l if XXX == {greatest_dec}]
+        #print(greatest_dec_to_print)
 
 
     
@@ -69,3 +77,17 @@ with open(budget_file, newline="") as budget_csv:
 
 # # Final script should both print the analysis to the terminal and export a text 
 # # file with the results
+
+#print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+
+#print(f"
+# Financial Analysis
+# - - - - - - - - - - - - - - - - - - - - 
+# Total Months:{}
+# Total: ${}
+# Average Change: ${}
+# Greatest Increase in Profits: {} (${})
+# Greatest Decrease in Profits: {} (${})
+# - - - - - - - - - - - - - - - - - - - -")
+
+#print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
