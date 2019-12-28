@@ -37,7 +37,7 @@ with open(budget_file, "r", newline="") as budget_csv:
         print(f"- - - - - - - - - - - - - - - - - - - -")
 
         # Get rid of the header (because it won't let you do the math b/c it is a string)
-        #header = next(budget_csv_reader)
+        header = next(budget_csv_reader)
 
         # Prompt the user, maybe this make the code to work
         #checking = input("Do you want to run the Financial Analysis? (y/n) ")
@@ -75,37 +75,58 @@ with open(budget_file, "r", newline="") as budget_csv:
         print(p_l_list)
         print(f"- - - - - - - - - - - - - - - - - - - -")
         
+        # Converting the list of strings to integers (to get the Total)
+        p_l_list_to_int = [int(i) for i in p_l_list]
+        print("The list that converts strings from the original list to integers is:- - - - - - ")
+        print(p_l_list_to_int)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+
+        # Print sum of elements in the aforementioned list
+        print("Sum of elements in int p_l_list_to_int is: ", sum(p_l_list_to_int))
+        total_to_print = sum(p_l_list_to_int)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+
         # Found differences between consecutive elements in the list
         diff_p_l = numpy.diff(p_l_list)
         print("The list of the difference of consecutive elements is: - - - - ")
         print(diff_p_l)
         print(f"- - - - - - - - - - - - - - - - - - - -")
 
-       # Converting the list of strings to integers (to do the calculations needed)
+        # Converting the list of strings to integers (to do the calculations needed)
         modified_diff_p_l = [int(i) for i in diff_p_l]
         print("The MODIFIED list that converts strings to integers is:- - - - - - ")
         print(modified_diff_p_l)
         print(f"- - - - - - - - - - - - - - - - - - - -")
 
-        # Identify average change in p_l
-        ave_p_l = statistics.mean(modified_diff_p_l) 
+        # Print sum of elements in the aforementioned list
+        print("Sum of elements in the modified_diff_p_l list is: ", sum(modified_diff_p_l))
+        print(f"- - - - - - - - - - - - - - - - - - - -")
 
-        # Identify greatest increase in p_l
-        increases = modified_diff_p_l[modified_diff_p_l > 0]
-        greatest_inc = max(increases)
-        
-        # Identify greatest decrease in p_l
-        decreases = modified_diff_p_l[modified_diff_p_l < 0]
-        greatest_dec = min(decreases)
+        # Identify average change in p_l
+        ave_p_l = sum(modified_diff_p_l)/85
+        print("The average of the consecutive elements (variable called here diff_p_l) is: ")
+        print(ave_p_l)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+
+        # Sorting the elements of the list to find maximum and minimum
+        modified_diff_p_l.sort()
+        print("Largest element is: ", modified_diff_p_l[-1])
+        print("Smallest element is: ", modified_diff_p_l[0])
+        greatest_inc = modified_diff_p_l[-1]
+        print(greatest_inc)
+        greatest_dec = modified_diff_p_l[0]
+        print(greatest_dec)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
 
 # Final script should print the analysis to the terminal 
 print(f"- - - - - - - - - - - - - - - - - - - -")
 print(f"Financial Analysis") 
 print(f"- - - - - - - - - - - - - - - - - - - -")
-print(f"Total Months: {str(total_months)}")
-print(f"Total: ${str(total_p_l)}")
+#print(f"Total Months: {str(total_months)}")
+print(f"Total: ${str(total_to_print)}")
 print(f"Average Change: ${str(ave_p_l)}")
 print(f"Greatest Increase in Profits: (${str(greatest_inc)})")
+print(f"Greatest Decrease in Profits: (${str(greatest_dec)})")
 #print(f"Greatest Increase in Profits: {str()} (${str()})")
 #print(f"Greatest Decrease in Profits: {str()} (${str()})")
 print("- - - - - - - - - - - - - - - - - - - -")
