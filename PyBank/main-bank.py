@@ -9,16 +9,14 @@ import numpy
 
 # Safe message
 print("dependencies were correctly imported")
+print(f"- - - - - - - - - - - - - - - - - - - -")
 
 # Path to collect the data (indicate where the data is)
 budget_file = os.path.join("Resources", "budget_data.csv")
 
 # Safe message
-#print("budget file path was found")
-
-# Create lists
-date_list = []
-p_l_list = []
+print("budget file path was found")
+print(f"- - - - - - - - - - - - - - - - - - - -")
 
 
 # Read the file using the CSV module (to take advantage of it, otherwise, you are reading it as text)
@@ -34,40 +32,71 @@ with open(budget_file, "r", newline="") as budget_csv:
         #print(budget_csv_reader)
         
         # Print the header row first
-        #whateveriwant_header = next(budget_csv_reader)
-        #print(f"CSV Header: {whateveriwant_header}")
-        #
+        whateveriwant_header = next(budget_csv_reader)
+        print(f"CSV Header: {whateveriwant_header}")
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+
         # Get rid of the header (because it won't let you do the math b/c it is a string)
-        header = next(budget_csv_reader)
+        #header = next(budget_csv_reader)
 
         # Prompt the user, maybe this make the code to work
         #checking = input("Do you want to run the Financial Analysis? (y/n) ")
 
-        # Start counting from zero
-        total_months = 0
-        total_p_l = 0
+        # Create lists
+        #date_list = []
+        p_l_list = []
+        counter_list = []
 
+        # Start counting from zero
+        #total_months = 0
+        total_p_l = 0
+        counter=0
+
+        # Append to the lists using the data from the dataset and reset the variables created
+        for row in budget_csv_reader:
+                p_l_list.append(total_p_l)
+                total_p_l = int(row[1])
+                counter_list.append(counter)
+                counter = counter + 1
+                #date_list.append(total_months)
+                #total_months = total_months + str(row[0])
+                
+        
+        # Print the created lists
+        #print("The created DATE LIST is: - - - - -")
+        #print(date_list)
+        #print(f"- - - - - - - - - - - - - - - - - - - -")
+
+        print("The created counter LIST is: - - - - -")
+        print(counter_list)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+
+        print("The created APPENDED p_l LIST OF INTEGERS is: - - - - -")
+        print(p_l_list)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+        
         # Found differences between consecutive elements in the list
         diff_p_l = numpy.diff(p_l_list)
+        print("The list of the difference of consecutive elements is: - - - - ")
+        print(diff_p_l)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
+
+       # Converting the list of strings to integers (to do the calculations needed)
+        modified_diff_p_l = [int(i) for i in diff_p_l]
+        print("The MODIFIED list that converts strings to integers is:- - - - - - ")
+        print(modified_diff_p_l)
+        print(f"- - - - - - - - - - - - - - - - - - - -")
 
         # Identify average change in p_l
-        ave_p_l = statistics.mean(diff_p_l) 
+        ave_p_l = statistics.mean(modified_diff_p_l) 
 
         # Identify greatest increase in p_l
-        increases = diff_p_l[diff_p_l > 0]
+        increases = modified_diff_p_l[modified_diff_p_l > 0]
         greatest_inc = max(increases)
         
         # Identify greatest decrease in p_l
-        decreases = diff_p_l[diff_p_l < 0]
+        decreases = modified_diff_p_l[modified_diff_p_l < 0]
         greatest_dec = min(decreases)
-        
-        # Append to the lists using the data from the dataset and reset the countings
-        for row in budget_csv_reader:
-                date_list.append([0])
-                p_l_list.append([1])
-                total_p_l=total_p_l+int(row[1])
-                total_months = total_months + 1
-      
 
 # Final script should print the analysis to the terminal 
 print(f"- - - - - - - - - - - - - - - - - - - -")
